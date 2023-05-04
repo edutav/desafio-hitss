@@ -1,0 +1,173 @@
+basePath: /v2
+definitions:
+  models.Clients:
+    properties:
+      contato:
+        type: string
+      cpf:
+        type: string
+      data_nascimento:
+        type: string
+      endereco:
+        type: string
+      id:
+        type: integer
+      nome:
+        type: string
+      sobrenome:
+        type: string
+    type: object
+  utils.HttpError:
+    properties:
+      code:
+        type: integer
+      message:
+        type: string
+    type: object
+host: petstore.swagger.io
+info:
+  contact:
+    email: support@swagger.io
+    name: API Support
+    url: http://www.swagger.io/support
+  description: This is a sample server Petstore server.
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  termsOfService: http://swagger.io/terms/
+  title: Swagger Example API
+  version: "1.0"
+paths:
+  /clients:
+    get:
+      consumes:
+      - application/json
+      description: Obtém uma lista de clientes existente
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Clients'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/utils.HttpError'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/utils.HttpError'
+      summary: Obtém uma lista de clientes
+      tags:
+      - clients
+    post:
+      consumes:
+      - application/json
+      description: Cria um novo cliente com base nos dados fornecidos
+      parameters:
+      - description: Client ADD
+        in: body
+        name: cliente
+        required: true
+        schema:
+          $ref: '#/definitions/models.Clients'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/models.Clients'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/utils.HttpError'
+      summary: Cria um novo cliente
+      tags:
+      - clients
+  /clients/{id}:
+    get:
+      consumes:
+      - application/json
+      description: Obtém um cliente existente com base no ID fornecido
+      parameters:
+      - description: ID do cliente
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Clients'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/utils.HttpError'
+      summary: Obtém um cliente pelo ID
+      tags:
+      - clients
+  /produtos/{id}:
+    delete:
+      consumes:
+      - application/json
+      description: Exclui um cliente existente com base no ID fornecido
+      parameters:
+      - description: ID do cliente
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "204":
+          description: ""
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/utils.HttpError'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/utils.HttpError'
+      summary: Exclui um cliente pelo ID
+      tags:
+      - clients
+    put:
+      consumes:
+      - application/json
+      description: Atualiza um cliente existente com base no ID fornecido
+      parameters:
+      - description: ID do cliente
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: Dados do cliente
+        in: body
+        name: cliente
+        required: true
+        schema:
+          $ref: '#/definitions/models.Clients'
+      produces:
+      - application/json
+      responses:
+        "204":
+          description: ""
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/utils.HttpError'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/utils.HttpError'
+      summary: Atualiza um cliente existente
+      tags:
+      - clients
+swagger: "2.0"

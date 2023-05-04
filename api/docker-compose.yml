@@ -1,0 +1,57 @@
+version: '3.9'
+
+services:
+  database_postgres:
+    image: postgres:13.3
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_DB: postgres
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      PGDATA: /data/postgres
+    volumes:
+      - postgres:/data/postgres
+    networks:
+      - postgres
+
+  rabbitmq:
+    image: rabbitmq:3-management
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    environment:
+      RABBITMQ_DEFAULT_USER: guest
+      RABBITMQ_DEFAULT_PASS: guest
+
+  api:
+    container_name: golang-api
+    image: golang-api:0.0.5
+    build:
+      context: .
+      dockerfile: Dockerfile
+    environment:
+      - AMBIENTE=DOCKER
+    ports:
+      - "8080:8080"
+    links:
+      - database_postgres
+    networks:
+      - postgres
+  # consumer:
+  #   container_name: golang-consumer
+  #   image: golang-consumer:1.0.0
+  #   build:
+  #     context: ../consumer
+  #     dockerfile: Dockerfile
+  #   links:
+  #     - db
+  #   networks:
+  #     - postgres
+
+networks:
+  postgres:
+    driver: bridge
+
+volumes:
+  postgres:
