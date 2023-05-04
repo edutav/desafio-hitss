@@ -20,17 +20,14 @@ Para executar o projeto, você pode seguir os passos abaixo usando o Docker e o 
 
 2. Clone o repositório do projeto para o seu ambiente local.
 
-3. Navegue até o diretório do projeto no terminal.
+3. Execute o comando abaixo para executar a API:
+   - go run api/cmd/server/main.go
+4. Após a conclusão da execução, navegue até a pasta comsumer e execute o comando
 
-4. Execute o comando abaixo para construir e executar os contêineres Docker do projeto:
-   - docker compose up -d
-5. Após a conclusão da construção dos contêineres, o projeto estará em execução e você poderá acessá-lo através do navegador ou de outras ferramentas apropriadas.
+   - go run consumer/main.go
 
-   - Para ver o swagger do projeto basta acessar o link:
-     - http://localhost:8080/swagger/index.html
-
-6. Para parar e remover os contêineres Docker do projeto, você pode executar o comando abaixo no diretório do projeto:
-   docker compose down
+5. Para ver o swagger do projeto basta acessar o link:
+   - http://localhost:8080/swagger/index.html
 
 ## Contato
 
