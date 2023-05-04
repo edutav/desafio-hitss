@@ -24,31 +24,6 @@ services:
       RABBITMQ_DEFAULT_USER: guest
       RABBITMQ_DEFAULT_PASS: guest
 
-  api:
-    container_name: golang-api
-    image: golang-api:0.0.5
-    build:
-      context: .
-      dockerfile: Dockerfile
-    environment:
-      - AMBIENTE=DOCKER
-    ports:
-      - "8080:8080"
-    links:
-      - database_postgres
-    networks:
-      - postgres
-  # consumer:
-  #   container_name: golang-consumer
-  #   image: golang-consumer:1.0.0
-  #   build:
-  #     context: ../consumer
-  #     dockerfile: Dockerfile
-  #   links:
-  #     - db
-  #   networks:
-  #     - postgres
-
 networks:
   postgres:
     driver: bridge
